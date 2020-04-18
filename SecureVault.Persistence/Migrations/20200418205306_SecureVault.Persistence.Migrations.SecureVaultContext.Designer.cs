@@ -10,8 +10,8 @@ using SecureVault.Persistence;
 namespace SecureVault.Persistence.Migrations
 {
     [DbContext(typeof(SecureVaultContext))]
-    [Migration("20200418005005_SecureVault.Persistence.SecureVaultContext")]
-    partial class SecureVaultPersistenceSecureVaultContext
+    [Migration("20200418205306_SecureVault.Persistence.Migrations.SecureVaultContext")]
+    partial class SecureVaultPersistenceMigrationsSecureVaultContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,10 @@ namespace SecureVault.Persistence.Migrations
 
             modelBuilder.Entity("SecureVault.Persistence.Models.Bank", b =>
                 {
-                    b.Property<decimal>("BankId")
+                    b.Property<int>("BankId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AccountNumber")
                         .IsRequired()
@@ -37,7 +38,7 @@ namespace SecureVault.Persistence.Migrations
                     b.Property<string>("LoginId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifyDate")
+                    b.Property<DateTime?>("ModifyDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -57,16 +58,20 @@ namespace SecureVault.Persistence.Migrations
 
             modelBuilder.Entity("SecureVault.Persistence.Models.Card", b =>
                 {
-                    b.Property<decimal>("CardId")
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("BankId")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<int>("BankId")
+                        .HasColumnType("int");
 
                     b.Property<string>("CardNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CardTypeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -80,9 +85,6 @@ namespace SecureVault.Persistence.Migrations
                     b.Property<int>("ExpiryYear")
                         .HasColumnType("int");
 
-                    b.Property<string>("TypeId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("CardId");
 
                     b.ToTable("Cards");
@@ -90,9 +92,10 @@ namespace SecureVault.Persistence.Migrations
 
             modelBuilder.Entity("SecureVault.Persistence.Models.CardType", b =>
                 {
-                    b.Property<decimal>("CardTypeId")
+                    b.Property<int>("CardTypeId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -105,26 +108,27 @@ namespace SecureVault.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            CardTypeId = 1m,
+                            CardTypeId = 1,
                             Name = "MasterCard"
                         },
                         new
                         {
-                            CardTypeId = 2m,
+                            CardTypeId = 2,
                             Name = "Maestro"
                         },
                         new
                         {
-                            CardTypeId = 3m,
+                            CardTypeId = 3,
                             Name = "American Express"
                         });
                 });
 
             modelBuilder.Entity("SecureVault.Persistence.Models.User", b =>
                 {
-                    b.Property<decimal>("UserId")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(20,0)");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
@@ -140,7 +144,7 @@ namespace SecureVault.Persistence.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifyDate")
+                    b.Property<DateTime?>("ModifyDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserName")

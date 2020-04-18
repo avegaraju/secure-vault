@@ -10,11 +10,11 @@ namespace SecureVault.Persistence.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public ulong CardId { get; set; }
+        public int CardId { get; set; }
         [ForeignKey("Bank")]
-        public ulong BankId { get; set; }
+        public int BankId { get; set; }
         [ForeignKey("CardType")]
-        public string TypeId { get; set; }
+        public int CardTypeId { get; set; }
         [Required]
         public string CardNumber { get; set; }
         [Required]

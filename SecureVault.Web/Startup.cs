@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SecureVault.Domain.Ports;
+using SecureVault.Domain.UseCases;
 using SecureVault.Persistence;
 
 namespace SecureVault.Web
@@ -28,6 +30,9 @@ namespace SecureVault.Web
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .AddUserSecrets<Startup>(optional: true);
+
+            services.AddTransient<IAddBankUseCase, AddBankUseCase>();
+            services.AddTransient<ISecureVaultDataStore, SecureVaultDataStore>();
 
             var settings = new Settings();
             
@@ -58,7 +63,6 @@ namespace SecureVault.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

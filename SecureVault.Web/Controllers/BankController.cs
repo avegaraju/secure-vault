@@ -4,11 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SecureVault.Domain.Requests;
+using SecureVault.Domain.UseCases;
+using SecureVault.Web.Models;
 
 namespace SecureVault.Web.Controllers
 {
     public class BankController : Controller
     {
+        private readonly IAddBankUseCase _addBankUseCase;
+
+        public BankController(IAddBankUseCase addBankUseCase)
+        {
+            _addBankUseCase = addBankUseCase;
+        }
         // GET: Bank
         [Route("Bank", Name = "ShowBanks")]
         public ActionResult Index()
@@ -28,22 +37,47 @@ namespace SecureVault.Web.Controllers
             return View();
         }
 
-        // POST: Bank/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Add(BankViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                if(ModelState.IsValid)
+                {
+                    var request = new AddBankRequest(
+                        model.BankName,
+                        model.AccountNumber,
+                        model.LoginId,
+                        model.Password
+                    );
+                    
+                    _addBankUseCase.Execute(request);
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return RedirectToAction(nameof(Index)); ;
             }
         }
+
+        // POST: Bank/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
+
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Bank/Edit/5
         public ActionResult Edit(int id)

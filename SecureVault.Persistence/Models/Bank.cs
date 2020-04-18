@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +9,7 @@ namespace SecureVault.Persistence.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public ulong BankId { get; set; }
+        public int BankId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
@@ -18,6 +19,6 @@ namespace SecureVault.Persistence.Models
         public string Url { get; set; }
         [Required]
         public DateTime CreateDate { get; set; } 
-        public DateTime ModifyDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
     }
 }

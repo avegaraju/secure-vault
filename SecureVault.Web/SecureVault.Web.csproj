@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SecureVault.Domain\SecureVault.Domain.csproj" />
     <ProjectReference Include="..\SecureVault.Persistence\SecureVault.Persistence.csproj" />
   </ItemGroup>
 

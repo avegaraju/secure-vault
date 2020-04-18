@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SecureVault.Persistence.Migrations
 {
-    public partial class SecureVaultPersistenceSecureVaultContext : Migration
+    public partial class SecureVaultPersistenceMigrationsSecureVaultContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,14 +11,15 @@ namespace SecureVault.Persistence.Migrations
                 name: "Banks",
                 columns: table => new
                 {
-                    BankId = table.Column<decimal>(nullable: false),
+                    BankId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
                     AccountNumber = table.Column<string>(nullable: false),
                     LoginId = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    ModifyDate = table.Column<DateTime>(nullable: false)
+                    ModifyDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,9 +30,10 @@ namespace SecureVault.Persistence.Migrations
                 name: "Cards",
                 columns: table => new
                 {
-                    CardId = table.Column<decimal>(nullable: false),
-                    BankId = table.Column<decimal>(nullable: false),
-                    TypeId = table.Column<string>(nullable: true),
+                    CardId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BankId = table.Column<int>(nullable: false),
+                    CardTypeId = table.Column<int>(nullable: false),
                     CardNumber = table.Column<string>(nullable: false),
                     Cvv = table.Column<int>(nullable: false),
                     ExpiryMonth = table.Column<int>(nullable: false),
@@ -47,7 +49,8 @@ namespace SecureVault.Persistence.Migrations
                 name: "CardTypes",
                 columns: table => new
                 {
-                    CardTypeId = table.Column<decimal>(nullable: false),
+                    CardTypeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -59,13 +62,14 @@ namespace SecureVault.Persistence.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<decimal>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(nullable: false),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: true),
                     EmailAddress = table.Column<string>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    ModifyDate = table.Column<DateTime>(nullable: false)
+                    ModifyDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,17 +79,17 @@ namespace SecureVault.Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "CardTypes",
                 columns: new[] { "CardTypeId", "Name" },
-                values: new object[] { 1m, "MasterCard" });
+                values: new object[] { 1, "MasterCard" });
 
             migrationBuilder.InsertData(
                 table: "CardTypes",
                 columns: new[] { "CardTypeId", "Name" },
-                values: new object[] { 2m, "Maestro" });
+                values: new object[] { 2, "Maestro" });
 
             migrationBuilder.InsertData(
                 table: "CardTypes",
                 columns: new[] { "CardTypeId", "Name" },
-                values: new object[] { 3m, "American Express" });
+                values: new object[] { 3, "American Express" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

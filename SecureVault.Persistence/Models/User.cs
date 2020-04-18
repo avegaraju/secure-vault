@@ -10,7 +10,7 @@ namespace SecureVault.Persistence.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public ulong UserId { get; set; }
+        public int UserId { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]
@@ -20,6 +20,6 @@ namespace SecureVault.Persistence.Models
         public string EmailAddress { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
-        public DateTime ModifyDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
     }
 }

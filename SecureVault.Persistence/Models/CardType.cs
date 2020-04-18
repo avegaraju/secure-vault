@@ -8,7 +8,7 @@ namespace SecureVault.Persistence.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public ulong CardTypeId { get; set; }
+        public int CardTypeId { get; set; }
         [Required]
         public string Name { get; set; } 
     }
