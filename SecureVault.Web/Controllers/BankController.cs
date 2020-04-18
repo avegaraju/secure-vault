@@ -13,16 +13,34 @@ namespace SecureVault.Web.Controllers
     public class BankController : Controller
     {
         private readonly IAddBankUseCase _addBankUseCase;
+        private readonly IGetBanksUseCase _getBanksUseCase;
 
-        public BankController(IAddBankUseCase addBankUseCase)
+        public BankController(
+            IAddBankUseCase addBankUseCase,
+            IGetBanksUseCase getBanksUseCase
+        )
         {
             _addBankUseCase = addBankUseCase;
+            _getBanksUseCase = getBanksUseCase;
         }
+
         // GET: Bank
         [Route("Bank", Name = "ShowBanks")]
         public ActionResult Index()
         {
-            return View();
+            var banks = _getBanksUseCase.Get()
+                .Select(response =>
+                    new BankViewModel
+                    {
+                        BankName = response.BankName,
+                        AccountNumber = response.AccountNumber,
+                        LoginId = response.LoginId,
+                        Password = response.Password,
+                        Url = response.Url
+                    }
+                ).ToList();
+
+            return View(banks);
         }
 
         // GET: Bank/Details/5

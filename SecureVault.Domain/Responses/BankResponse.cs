@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace SecureVault.Domain.Bank
+namespace SecureVault.Domain.Responses
 {
-    public class BankData
+    public class BankResponse
     {
-        public BankData(
+        public BankResponse(
             string bankName,
             string accountNumber,
             string url,
             string loginId,
             string password,
             DateTime createDate,
-            DateTime? modifyDate=null
+            DateTime? modifyDate
         )
         {
             BankName = bankName;

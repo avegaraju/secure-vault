@@ -31,8 +31,7 @@ namespace SecureVault.Web
                 .AddJsonFile("appsettings.json")
                 .AddUserSecrets<Startup>(optional: true);
 
-            services.AddTransient<IAddBankUseCase, AddBankUseCase>();
-            services.AddTransient<ISecureVaultDataStore, SecureVaultDataStore>();
+            RegisterDependencies(services);
 
             var settings = new Settings();
             
@@ -44,6 +43,13 @@ namespace SecureVault.Web
                     optionsBuilder => optionsBuilder.MigrationsAssembly("SecureVault.Persistence"))
             );
             services.AddControllersWithViews();
+        }
+
+        private static void RegisterDependencies(IServiceCollection services)
+        {
+            services.AddTransient<IAddBankUseCase, AddBankUseCase>();
+            services.AddTransient<ISecureVaultDataStore, SecureVaultDataStore>();
+            services.AddTransient<IGetBanksUseCase, GetBanksUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,11 +21,13 @@ namespace SecureVault.Domain.UseCases
         public void Execute(AddBankRequest request)
         {
             _secureVaultDataStore.AddBank(new BankData(
-                request.BankName,
-                request.AccountNumber,
-                request.Url,
-                request.LoginId,
-                request.Password)
+                    request.BankName,
+                    request.AccountNumber,
+                    request.Url,
+                    request.LoginId,
+                    request.Password,
+                    request.CreateDate
+                )
             );
         }
     }

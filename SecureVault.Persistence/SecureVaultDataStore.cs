@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using SecureVault.Domain.Bank;
 using SecureVault.Domain.Ports;
 using SecureVault.Persistence.Models;
@@ -25,6 +27,21 @@ namespace SecureVault.Persistence
             });
 
             SaveChanges();
+        }
+
+        public IReadOnlyCollection<BankData> GetBanks()
+        {
+            return Banks.Select(bank =>
+                new BankData(
+                    bank.Name,
+                    bank.AccountNumber,
+                    bank.Url,
+                    bank.LoginId,
+                    bank.Password,
+                    bank.CreateDate,
+                    bank.ModifyDate
+                )
+            ).ToList();
         }
     }
 }
