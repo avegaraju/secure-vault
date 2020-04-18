@@ -33,6 +33,7 @@ namespace SecureVault.Persistence
         {
             return Banks.Select(bank =>
                 new BankData(
+                    bank.BankId,
                     bank.Name,
                     bank.AccountNumber,
                     bank.Url,

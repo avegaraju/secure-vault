@@ -23,6 +23,7 @@ namespace SecureVault.Domain.UseCases
             return _secureVaultDataStore.GetBanks()
                 .Select(data =>
                     new BankResponse(
+                        data.BankId.Value,
                         data.BankName,
                         data.AccountNumber,
                         data.Url,

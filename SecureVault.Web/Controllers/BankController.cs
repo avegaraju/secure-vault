@@ -32,6 +32,7 @@ namespace SecureVault.Web.Controllers
                 .Select(response =>
                     new BankViewModel
                     {
+                        BankId =  response.BankId,
                         BankName = response.BankName,
                         AccountNumber = response.AccountNumber,
                         LoginId = response.LoginId,
@@ -67,7 +68,8 @@ namespace SecureVault.Web.Controllers
                         model.BankName,
                         model.AccountNumber,
                         model.LoginId,
-                        model.Password
+                        model.Password,
+                        model.Url
                     );
                     
                     _addBankUseCase.Execute(request);
@@ -79,23 +81,6 @@ namespace SecureVault.Web.Controllers
                 return RedirectToAction(nameof(Index)); ;
             }
         }
-
-        // POST: Bank/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
         // GET: Bank/Edit/5
         public ActionResult Edit(int id)

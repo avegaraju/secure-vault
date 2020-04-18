@@ -5,6 +5,7 @@ namespace SecureVault.Domain.Responses
     public class BankResponse
     {
         public BankResponse(
+            int bankId,
             string bankName,
             string accountNumber,
             string url,
@@ -14,6 +15,7 @@ namespace SecureVault.Domain.Responses
             DateTime? modifyDate
         )
         {
+            BankId = bankId;
             BankName = bankName;
             AccountNumber = accountNumber;
             Url = url;
@@ -23,6 +25,7 @@ namespace SecureVault.Domain.Responses
             ModifyDate = modifyDate;
         }
 
+        public int BankId { get; }
         public string BankName { get; }
         public string AccountNumber { get; }
         public string LoginId { get; }

@@ -9,13 +9,15 @@ namespace SecureVault.Domain.Requests
             string bankName, 
             string accountNumber, 
             string loginId, 
-            string password
+            string password,
+            string url
             )
         {
             BankName = bankName;
             AccountNumber = accountNumber;
             LoginId = loginId;
             Password = password;
+            Url = url;
             CreateDate = DateTime.Now;
         }
 

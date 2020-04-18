@@ -18,7 +18,13 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">@bank.AccountNumber</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-edit fa-2x text-gray-300"></i>
+                                @Html.ActionLink(
+                                    linkText:string.Empty, 
+                                    actionName: "Edit", 
+                                    controllerName:"Bank", 
+                                    routeValues:new {Id = bank.BankId}, 
+                                    htmlAttributes:new {@class="fas fa-edit fa-2x text-gray-300"}
+                                    )
                             </div>
                         </div>
                     </div>
