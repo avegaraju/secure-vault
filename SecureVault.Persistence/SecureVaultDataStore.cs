@@ -44,5 +44,39 @@ namespace SecureVault.Persistence
                 )
             ).ToList();
         }
+
+        public BankData GetBankById(int bankId)
+        {
+            var bank = Banks.Find(bankId);
+
+            return new BankData(
+                bank.BankId,
+                bank.Name,
+                bank.AccountNumber,
+                bank.Url,
+                bank.LoginId,
+                bank.Password,
+                bank.CreateDate,
+                bank.ModifyDate
+            );
+        }
+
+        public void UpdateBank(BankData bankData)
+        {
+            var bank = new Bank
+            {
+                BankId = bankData.BankId.Value,
+                Name = bankData.BankName,
+                AccountNumber = bankData.AccountNumber,
+                LoginId = bankData.LoginId,
+                Password = bankData.Password,
+                Url = bankData.Url,
+                CreateDate = bankData.CreateDate,
+                ModifyDate = bankData.ModifyDate
+            };
+            
+            Banks.Update(bank);
+            SaveChanges();
+        }
     }
 }

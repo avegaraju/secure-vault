@@ -14,14 +14,20 @@ namespace SecureVault.Web.Controllers
     {
         private readonly IAddBankUseCase _addBankUseCase;
         private readonly IGetBanksUseCase _getBanksUseCase;
+        private readonly IGetBankByIdUseCase _getBankByIdUseCase;
+        private readonly IUpdateBankUseCase _updateBankUseCase;
 
         public BankController(
             IAddBankUseCase addBankUseCase,
-            IGetBanksUseCase getBanksUseCase
+            IGetBanksUseCase getBanksUseCase,
+            IGetBankByIdUseCase getBankByIdUseCase,
+            IUpdateBankUseCase updateBankUseCase
         )
         {
             _addBankUseCase = addBankUseCase;
             _getBanksUseCase = getBanksUseCase;
+            _getBankByIdUseCase = getBankByIdUseCase;
+            _updateBankUseCase = updateBankUseCase;
         }
 
         // GET: Bank
@@ -85,17 +91,47 @@ namespace SecureVault.Web.Controllers
         // GET: Bank/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var response = _getBankByIdUseCase.Get(id);
+
+            var bankViewModel = new BankViewModel
+            {
+                BankId = response.BankId,
+                BankName = response.BankName,
+                AccountNumber = response.AccountNumber,
+                LoginId = response.LoginId,
+                Password = response.Password,
+                Url = response.Url,
+                CreateDate = response.CreateDate
+            };
+
+            return View(bankViewModel);
         }
 
         // POST: Bank/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, IFormCollection formCollection)
         {
             try
             {
-                // TODO: Add update logic here
+                var bankName = formCollection["BankName"][0];
+                var accountNumber = formCollection["AccountNumber"][0];
+                var loginId = formCollection["LoginId"][0];
+                var password = formCollection["Password"][0];
+                var url = formCollection["Url"][0];
+                var createDate = DateTime.Parse(formCollection["CreateDate"][0]);
+
+                var updateBankRequest = new UpdateBankRequest(
+                    id,
+                    bankName,
+                    accountNumber,
+                    loginId,
+                    password,
+                    url,
+                    createDate
+                );
+
+                _updateBankUseCase.Execute(updateBankRequest);
 
                 return RedirectToAction(nameof(Index));
             }

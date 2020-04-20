@@ -7,5 +7,7 @@ namespace SecureVault.Domain.Ports
     {
         void AddBank(BankData bankData);
         IReadOnlyCollection<BankData> GetBanks();
+        BankData GetBankById(int bankId);
+        void UpdateBank(BankData bankData);
     }
 }
