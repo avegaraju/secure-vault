@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SecureVault.Domain.Exceptions;
 using SecureVault.Domain.Requests;
+using SecureVault.Domain.Responses;
 using SecureVault.Domain.UseCases;
 using SecureVault.Web.Models;
 
@@ -91,7 +91,16 @@ namespace SecureVault.Web.Controllers
         // GET: Bank/Edit/5
         public ActionResult Edit(int id)
         {
-            var response = _getBankByIdUseCase.Get(id);
+            BankResponse response;
+
+            try
+            {
+                response = _getBankByIdUseCase.Get(id);
+            }
+            catch (NotFoundException e)
+            {
+                return View("NotFound");
+            }
 
             var bankViewModel = new BankViewModel
             {

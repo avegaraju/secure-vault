@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SecureVault.Domain.Exceptions;
 using SecureVault.Domain.Ports;
 using SecureVault.Domain.Responses;
 
@@ -21,6 +22,9 @@ namespace SecureVault.Domain.UseCases
         public BankResponse Get(int bankId)
         {
             var bankData = _secureVaultDataStore.GetBankById(bankId);
+
+            if(bankData == null)
+                throw new NotFoundException("Bank data not found.");
 
             return new BankResponse(
                 bankData.BankId.Value,
