@@ -19,11 +19,18 @@
                             </div>
                             <div class="col-auto">
                                 @Html.ActionLink(
-                                    linkText:string.Empty, 
-                                    actionName: "Edit", 
-                                    controllerName:"Bank", 
-                                    routeValues:new {Id = bank.BankId}, 
-                                    htmlAttributes:new {@class="fas fa-edit fa-2x text-gray-300"}
+                                    linkText: string.Empty,
+                                    actionName: "Edit",
+                                    controllerName: "Bank",
+                                    routeValues: new { Id = bank.BankId },
+                                    htmlAttributes: new { @class = "fas fa-edit fa-2x text-gray-300" }
+                                    )
+                                @Html.ActionLink(
+                                    linkText: string.Empty,
+                                    actionName: "Delete",
+                                    controllerName: "Bank",
+                                    routeValues: new { Id = bank.BankId },
+                                    htmlAttributes: new { @class = "fas fa-cut fa-2x text-gray-300" }
                                     )
                             </div>
                         </div>

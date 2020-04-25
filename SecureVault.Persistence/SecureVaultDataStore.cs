@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SecureVault.Domain.Bank;
@@ -31,36 +32,40 @@ namespace SecureVault.Persistence
 
         public IReadOnlyCollection<BankData> GetBanks()
         {
-            return Banks.Select(bank =>
-                new BankData(
-                    bank.BankId,
-                    bank.Name,
-                    bank.AccountNumber,
-                    bank.Url,
-                    bank.LoginId,
-                    bank.Password,
-                    bank.CreateDate,
-                    bank.ModifyDate
-                )
-            ).ToList();
+            return Banks
+                .Where(bank => bank.Active)
+                .Select(bank =>
+                    new BankData(
+                        bank.BankId,
+                        bank.Name,
+                        bank.AccountNumber,
+                        bank.Url,
+                        bank.LoginId,
+                        bank.Password,
+                        bank.CreateDate,
+                        bank.ModifyDate,
+                        bank.Active
+                    )
+                ).ToList();
         }
 
         public BankData GetBankById(int bankId)
         {
             var bank = Banks.Find(bankId);
+
+            if (bank == null || bank.Active == false)
+                return null;
             
-            return bank == null
-                ? null
-                : new BankData(
-                    bank.BankId,
-                    bank.Name,
-                    bank.AccountNumber,
-                    bank.Url,
-                    bank.LoginId,
-                    bank.Password,
-                    bank.CreateDate,
-                    bank.ModifyDate
-                );
+            return new BankData(
+                bank.BankId,
+                bank.Name,
+                bank.AccountNumber,
+                bank.Url,
+                bank.LoginId,
+                bank.Password,
+                bank.CreateDate,
+                bank.ModifyDate
+            );
         }
 
         public void UpdateBank(BankData bankData)
@@ -74,7 +79,8 @@ namespace SecureVault.Persistence
                 Password = bankData.Password,
                 Url = bankData.Url,
                 CreateDate = bankData.CreateDate,
-                ModifyDate = bankData.ModifyDate
+                ModifyDate = bankData.ModifyDate,
+                Active = bankData.Active
             };
             
             Banks.Update(bank);

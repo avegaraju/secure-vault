@@ -16,18 +16,21 @@ namespace SecureVault.Web.Controllers
         private readonly IGetBanksUseCase _getBanksUseCase;
         private readonly IGetBankByIdUseCase _getBankByIdUseCase;
         private readonly IUpdateBankUseCase _updateBankUseCase;
+        private readonly IDeleteBankUseCase _deleteBankUseCase;
 
         public BankController(
             IAddBankUseCase addBankUseCase,
             IGetBanksUseCase getBanksUseCase,
             IGetBankByIdUseCase getBankByIdUseCase,
-            IUpdateBankUseCase updateBankUseCase
+            IUpdateBankUseCase updateBankUseCase,
+            IDeleteBankUseCase deleteBankUseCase
         )
         {
             _addBankUseCase = addBankUseCase;
             _getBanksUseCase = getBanksUseCase;
             _getBankByIdUseCase = getBankByIdUseCase;
             _updateBankUseCase = updateBankUseCase;
+            _deleteBankUseCase = deleteBankUseCase;
         }
 
         // GET: Bank
@@ -153,17 +156,55 @@ namespace SecureVault.Web.Controllers
         // GET: Bank/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            BankResponse bankResponse;
+            try
+            {
+                bankResponse = _getBankByIdUseCase.Get(id);
+            }
+            catch (NotFoundException)
+            {
+                return View("NotFound");
+            }
+            
+            var bankViewModel = new BankViewModel
+            {
+                AccountNumber = bankResponse.AccountNumber,
+                BankId = bankResponse.BankId,
+                BankName = bankResponse.BankName,
+                CreateDate = bankResponse.CreateDate,
+                LoginId = bankResponse.LoginId,
+                Password = bankResponse.Password,
+                Url = bankResponse.Url
+            };
+
+            return View(bankViewModel);
         }
 
         // POST: Bank/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, IFormCollection formCollection)
         {
             try
             {
-                // TODO: Add delete logic here
+                var bankName = formCollection["BankName"][0];
+                var accountNumber = formCollection["AccountNumber"][0];
+                var loginId = formCollection["LoginId"][0];
+                var password = formCollection["Password"][0];
+                var url = formCollection["Url"][0];
+                var createDate = DateTime.Parse(formCollection["CreateDate"][0]);
+
+                var deleteBankRequest = new DeleteBankRequest(
+                    id,
+                    bankName,
+                    accountNumber,
+                    loginId,
+                    password,
+                    url,
+                    createDate
+                );
+
+                _deleteBankUseCase.Execute(deleteBankRequest);
 
                 return RedirectToAction(nameof(Index));
             }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SecureVault.Persistence.Migrations
 {
-    public partial class SecureVaultPersistenceMigrationsSecureVaultContext : Migration
+    public partial class SecureVaultDbMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,7 @@ namespace SecureVault.Persistence.Migrations
                     LoginId = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: true)
                 },

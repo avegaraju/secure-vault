@@ -10,8 +10,8 @@ using SecureVault.Persistence;
 namespace SecureVault.Persistence.Migrations
 {
     [DbContext(typeof(SecureVaultContext))]
-    [Migration("20200418205306_SecureVault.Persistence.Migrations.SecureVaultContext")]
-    partial class SecureVaultPersistenceMigrationsSecureVaultContext
+    [Migration("20200425141336_SecureVaultDbMigration")]
+    partial class SecureVaultDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,10 @@ namespace SecureVault.Persistence.Migrations
                     b.Property<string>("AccountNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Active")
+                        .HasDefaultValue(1)
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");

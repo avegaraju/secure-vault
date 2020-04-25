@@ -18,6 +18,9 @@ namespace SecureVault.Persistence.Models
         public string Password { get; set; }
         public string Url { get; set; }
         [Required]
+        [DefaultValue(true)]
+        public bool Active { get; set; }
+        [Required]
         public DateTime CreateDate { get; set; } 
         public DateTime? ModifyDate { get; set; }
     }
