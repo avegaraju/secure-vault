@@ -11,7 +11,8 @@ namespace SecureVault.Domain.Bank
             string loginId,
             string password,
             DateTime createDate,
-            DateTime? modifyDate = null
+            DateTime? modifyDate = null,
+            bool active = true
         ) : this(
             null,
             bankName,
@@ -20,7 +21,8 @@ namespace SecureVault.Domain.Bank
             loginId,
             password,
             createDate,
-            modifyDate
+            modifyDate,
+            active
         )
         {
         }

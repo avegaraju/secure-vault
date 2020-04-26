@@ -24,7 +24,8 @@ namespace SecureVault.Persistence
                 Password = bankData.Password,
                 CreateDate = bankData.CreateDate,
                 Url = bankData.Url,
-                ModifyDate = null
+                ModifyDate = null,
+                Active = bankData.Active
             });
 
             SaveChanges();

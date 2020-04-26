@@ -83,6 +83,10 @@ namespace SecureVault.Web.Controllers
                     
                     _addBankUseCase.Execute(request);
                 }
+                else
+                {
+                    return View("Create");
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch(Exception ex)
