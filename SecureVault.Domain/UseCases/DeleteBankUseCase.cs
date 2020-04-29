@@ -26,6 +26,7 @@ namespace SecureVault.Domain.UseCases
                 deleteBankRequest.LoginId,
                 deleteBankRequest.Password,
                 deleteBankRequest.CreateDate,
+                deleteBankRequest.Notes,
                 deleteBankRequest.ModifyDate,
                 active: false
             );

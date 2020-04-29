@@ -10,6 +10,7 @@ namespace SecureVault.Domain.Bank
             string url,
             string loginId,
             string password,
+            string notes,
             DateTime createDate,
             DateTime? modifyDate = null,
             bool active = true
@@ -21,6 +22,7 @@ namespace SecureVault.Domain.Bank
             loginId,
             password,
             createDate,
+            notes,
             modifyDate,
             active
         )
@@ -35,6 +37,7 @@ namespace SecureVault.Domain.Bank
             string loginId,
             string password,
             DateTime createDate,
+            string notes,
             DateTime? modifyDate=null,
             bool active = true
         )
@@ -46,6 +49,7 @@ namespace SecureVault.Domain.Bank
             LoginId = loginId;
             Password = password;
             CreateDate = createDate;
+            Notes = notes;
             ModifyDate = modifyDate;
             Active = active;
         }
@@ -59,5 +63,6 @@ namespace SecureVault.Domain.Bank
         public DateTime CreateDate { get; }
         public DateTime? ModifyDate { get; }
         public bool Active { get; }
+        public string Notes { get; set; }
     }
 }

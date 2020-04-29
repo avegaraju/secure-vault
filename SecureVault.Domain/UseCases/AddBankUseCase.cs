@@ -26,6 +26,7 @@ namespace SecureVault.Domain.UseCases
                     request.Url,
                     request.LoginId,
                     request.Password,
+                    request.Notes,
                     request.CreateDate
                 )
             );

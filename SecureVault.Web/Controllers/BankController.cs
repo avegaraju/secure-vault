@@ -78,7 +78,8 @@ namespace SecureVault.Web.Controllers
                         model.AccountNumber,
                         model.LoginId,
                         model.Password,
-                        model.Url
+                        model.Url,
+                        model.Notes
                     );
                     
                     _addBankUseCase.Execute(request);
@@ -126,30 +127,41 @@ namespace SecureVault.Web.Controllers
         // POST: Bank/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection formCollection)
+        //public ActionResult Edit(int id, IFormCollection formCollection)
+        public ActionResult Edit([Bind(include:"BankId, BankName, AccountNumber, LoginId, Password, Url, CreateDate")]BankViewModel model)
         {
             try
             {
-                var bankName = formCollection["BankName"][0];
-                var accountNumber = formCollection["AccountNumber"][0];
-                var loginId = formCollection["LoginId"][0];
-                var password = formCollection["Password"][0];
-                var url = formCollection["Url"][0];
-                var createDate = DateTime.Parse(formCollection["CreateDate"][0]);
+                if (ModelState.IsValid)
+                {
+                    var updateBankRequest = new UpdateBankRequest(
+                        model.BankId,
+                        model.BankName,
+                        model.AccountNumber,
+                        model.LoginId,
+                        model.Password,
+                        model.Url,
+                        model.CreateDate,
+                        model.Notes
+                    );
 
-                var updateBankRequest = new UpdateBankRequest(
-                    id,
-                    bankName,
-                    accountNumber,
-                    loginId,
-                    password,
-                    url,
-                    createDate
-                );
-
-                _updateBankUseCase.Execute(updateBankRequest);
-
-                return RedirectToAction(nameof(Index));
+                    _updateBankUseCase.Execute(updateBankRequest);
+                    
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return RedirectToAction("Edit", new
+                    {
+                        BankId= model.BankId, 
+                        BankName= model.BankName,
+                        AccountNumber = model.AccountNumber,
+                        LoginId = model.LoginId,
+                        Password = model.Password,
+                        Url = model.Url,
+                        CreateDate = model.CreateDate
+                    });
+                }
             }
             catch
             {
@@ -205,7 +217,8 @@ namespace SecureVault.Web.Controllers
                     loginId,
                     password,
                     url,
-                    createDate
+                    createDate,
+                    string.Empty
                 );
 
                 _deleteBankUseCase.Execute(deleteBankRequest);

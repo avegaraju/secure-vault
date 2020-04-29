@@ -21,5 +21,6 @@ namespace SecureVault.Web.Models
         [Display(Name = "Bank's website url")]
         public string Url { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Notes { get; set; }
     }
 }

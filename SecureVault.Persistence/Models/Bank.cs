@@ -17,6 +17,7 @@ namespace SecureVault.Persistence.Models
         public string LoginId { get; set; }
         public string Password { get; set; }
         public string Url { get; set; }
+        public string Notes { get; set; }
         [Required]
         [DefaultValue(true)]
         public bool Active { get; set; }

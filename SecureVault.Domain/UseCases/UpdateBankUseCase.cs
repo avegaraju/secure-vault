@@ -27,6 +27,7 @@ namespace SecureVault.Domain.UseCases
                 updateBankRequest.LoginId,
                 updateBankRequest.Password,
                 updateBankRequest.CreateDate,
+                updateBankRequest.Notes,
                 updateBankRequest.ModifyDate
             );
             _secureVaultDataStore.UpdateBank(bankData);

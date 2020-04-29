@@ -11,7 +11,8 @@ namespace SecureVault.Domain.Requests
             string loginId,
             string password,
             string url,
-            DateTime createDate
+            DateTime createDate,
+            string notes
         )
         {
             BankId = bankId;
@@ -21,6 +22,7 @@ namespace SecureVault.Domain.Requests
             Password = password;
             Url = url;
             CreateDate = createDate;
+            Notes = notes;
             ModifyDate = DateTime.Now;
         }
 
@@ -31,6 +33,7 @@ namespace SecureVault.Domain.Requests
         public string Password { get; }
         public string Url { get; }
         public DateTime CreateDate { get; }
+        public string Notes { get; }
         public DateTime ModifyDate { get; }
     }
 }

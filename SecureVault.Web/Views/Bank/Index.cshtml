@@ -5,7 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hr/>
+<!-- Page Header-->
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">Banks</h2>
+    </div>
+</header>
+<!-- Breadcrumb-->
+<div class="breadcrumb-holder container-fluid">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">@Html.ActionLink("Home", actionName: "Index", controllerName: "Home")</li>
+        <li class="breadcrumb-item active">Banks</li>
+    </ul>
+</div>
+<br />
+
 <div class="container-fluid">
     @foreach (var bank in Model)
     {
@@ -20,18 +34,18 @@
                             </div>
                             <div class="col-auto">
                                 @Html.ActionLink(
-                                    linkText: string.Empty,
+                                    linkText: "create",
                                     actionName: "Edit",
                                     controllerName: "Bank",
                                     routeValues: new { Id = bank.BankId },
-                                    htmlAttributes: new { @class = "fas fa-edit fa-2x text-gray-300" }
+                                    htmlAttributes: new { @class = "material-icons" }
                                     )
                                 @Html.ActionLink(
-                                    linkText: string.Empty,
+                                    linkText: "remove_circle_outline",
                                     actionName: "Delete",
                                     controllerName: "Bank",
                                     routeValues: new { Id = bank.BankId },
-                                    htmlAttributes: new { @class = "fas fa-cut fa-2x text-gray-300" }
+                                    htmlAttributes: new { @class = "material-icons" }
                                     )
                             </div>
                         </div>

@@ -44,6 +44,7 @@ namespace SecureVault.Persistence
                         bank.LoginId,
                         bank.Password,
                         bank.CreateDate,
+                        bank.Notes,
                         bank.ModifyDate,
                         bank.Active
                     )
@@ -65,6 +66,7 @@ namespace SecureVault.Persistence
                 bank.LoginId,
                 bank.Password,
                 bank.CreateDate,
+                bank.Notes,
                 bank.ModifyDate
             );
         }

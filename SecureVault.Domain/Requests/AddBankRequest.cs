@@ -10,7 +10,8 @@ namespace SecureVault.Domain.Requests
             string accountNumber, 
             string loginId, 
             string password,
-            string url
+            string url,
+            string notes
             )
         {
             BankName = bankName;
@@ -18,6 +19,7 @@ namespace SecureVault.Domain.Requests
             LoginId = loginId;
             Password = password;
             Url = url;
+            Notes = notes;
             CreateDate = DateTime.Now;
         }
 
@@ -26,6 +28,7 @@ namespace SecureVault.Domain.Requests
         public string LoginId { get; }
         public string Password { get; }
         public string Url { get; }
+        public string Notes { get; }
         public DateTime CreateDate { get; }
     }
 }
