@@ -25,7 +25,8 @@ namespace SecureVault.Persistence
                 CreateDate = bankData.CreateDate,
                 Url = bankData.Url,
                 ModifyDate = null,
-                Active = bankData.Active
+                Active = bankData.Active,
+                Notes = bankData.Notes
             });
 
             SaveChanges();
@@ -83,7 +84,8 @@ namespace SecureVault.Persistence
                 Url = bankData.Url,
                 CreateDate = bankData.CreateDate,
                 ModifyDate = bankData.ModifyDate,
-                Active = bankData.Active
+                Active = bankData.Active,
+                Notes = bankData.Notes
             };
             
             Banks.Update(bank);

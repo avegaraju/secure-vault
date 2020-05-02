@@ -34,7 +34,8 @@ namespace SecureVault.Domain.UseCases
                 bankData.LoginId,
                 bankData.Password,
                 bankData.CreateDate,
-                bankData.ModifyDate
+                bankData.ModifyDate,
+                bankData.Notes
             );
         }
     }

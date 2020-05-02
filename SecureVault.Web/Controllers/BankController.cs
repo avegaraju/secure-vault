@@ -118,7 +118,8 @@ namespace SecureVault.Web.Controllers
                 LoginId = response.LoginId,
                 Password = response.Password,
                 Url = response.Url,
-                CreateDate = response.CreateDate
+                CreateDate = response.CreateDate,
+                Notes = response.Notes
             };
 
             return View(bankViewModel);
@@ -127,8 +128,7 @@ namespace SecureVault.Web.Controllers
         // POST: Bank/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection formCollection)
-        public ActionResult Edit([Bind(include:"BankId, BankName, AccountNumber, LoginId, Password, Url, CreateDate")]BankViewModel model)
+        public ActionResult Edit([Bind(include:"BankId, BankName, AccountNumber, LoginId, Password, Url, CreateDate, Notes")]BankViewModel model)
         {
             try
             {

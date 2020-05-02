@@ -12,7 +12,8 @@ namespace SecureVault.Domain.Responses
             string loginId,
             string password,
             DateTime createDate,
-            DateTime? modifyDate
+            DateTime? modifyDate,
+            string notes
         )
         {
             BankId = bankId;
@@ -23,6 +24,7 @@ namespace SecureVault.Domain.Responses
             Password = password;
             CreateDate = createDate;
             ModifyDate = modifyDate;
+            Notes = notes;
         }
 
         public int BankId { get; }
@@ -33,5 +35,6 @@ namespace SecureVault.Domain.Responses
         public string Url { get; }
         public DateTime CreateDate { get; }
         public DateTime? ModifyDate { get; }
+        public string Notes { get; }
     }
 }

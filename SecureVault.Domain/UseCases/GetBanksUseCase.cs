@@ -30,7 +30,8 @@ namespace SecureVault.Domain.UseCases
                         data.LoginId,
                         data.Password,
                         data.CreateDate,
-                        data.ModifyDate
+                        data.ModifyDate,
+                        data.Notes
                     )
                 ).ToList();
         }
