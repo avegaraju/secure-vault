@@ -56,6 +56,7 @@ namespace SecureVault.Web
             services.AddTransient<IUpdateBankUseCase, UpdateBankUseCase>();
             services.AddTransient<IDeleteBankUseCase, DeleteBankUseCase>();
             services.AddTransient<IGetCardTypesUseCase, GetCardTypesUseCase>();
+            services.AddTransient<IAddCardUseCase, AddCardUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,11 +78,10 @@ namespace SecureVault.Web
 
             app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "ShowBanks",
+                    name: "default",
                     pattern: "{controller=Bank}/{action=Index}/{id?}");
             });
         }

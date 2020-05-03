@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace SecureVault.Persistence.Models
 {
@@ -25,6 +23,6 @@ namespace SecureVault.Persistence.Models
         public int ExpiryYear { get; set; }
         [Required]
         public DateTime CreateDate { get; set; }
-
+        public string Notes { get; set; }
     }
 }

@@ -99,5 +99,22 @@ namespace SecureVault.Persistence
                 .Select(type => new CardTypesData(type.CardTypeId, type.Name))
                 .ToList();
         }
+
+        public void AddCard(CardData cardData)
+        {
+            Cards.Add(new Card
+            {
+                BankId = cardData.BankId,
+                CardNumber = cardData.CardNumber,
+                CardTypeId = cardData.CardTypeId,
+                CreateDate = cardData.CreateDate,
+                Cvv = cardData.Cvv,
+                ExpiryMonth = cardData.ExpiryMonth,
+                ExpiryYear = cardData.ExpiryYear,
+                Notes = cardData.Notes
+            });
+
+            SaveChanges();
+        }
     }
 }

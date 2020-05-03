@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SecureVault.Domain.Requests;
 using SecureVault.Domain.UseCases;
 using SecureVault.Web.Models;
 
@@ -10,15 +11,19 @@ namespace SecureVault.Web.Controllers
     {
         private readonly IGetBanksUseCase _getBanksUseCase;
         private readonly IGetCardTypesUseCase _getCardTypesUseCase;
+        private readonly IAddCardUseCase _addCardUseCase;
 
         public CardController(
             IGetBanksUseCase getBanksUseCase,
-            IGetCardTypesUseCase getCardTypesUseCase
-            )
+            IGetCardTypesUseCase getCardTypesUseCase,
+            IAddCardUseCase addCardUseCase
+        )
         {
             _getBanksUseCase = getBanksUseCase;
             _getCardTypesUseCase = getCardTypesUseCase;
+            _addCardUseCase = addCardUseCase;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -28,6 +33,24 @@ namespace SecureVault.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Add(CardViewModel cardViewModel)
         {
+            if (ModelState.IsValid)
+            {
+                var addCardRequest = new AddCardRequest(
+                    cardViewModel.BankId,
+                    cardViewModel.CardTypeId,
+                    cardViewModel.CardNumber,
+                    cardViewModel.Cvv,
+                    cardViewModel.ExpiryMonth,
+                    cardViewModel.ExpiryYear,
+                    cardViewModel.Notes
+                );
+
+                _addCardUseCase.Execute(addCardRequest);
+            }
+            else
+            {
+                return View("Create");
+            }
 
             return RedirectToAction(nameof(Index));
         }
