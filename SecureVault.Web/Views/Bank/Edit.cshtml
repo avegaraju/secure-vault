@@ -52,6 +52,8 @@
                        antiforgery: true,
                        new { @class = "form-horizontal" }))
                     {
+                        @Html.AntiForgeryToken()
+
                         <div class="form-group row">
                             @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
 

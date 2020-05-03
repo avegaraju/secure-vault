@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using SecureVault.Web.Validations;
 
 namespace SecureVault.Web.Models
 {
@@ -18,10 +17,8 @@ namespace SecureVault.Web.Models
         [Required(ErrorMessage = "Cvv is required.")]
         public int Cvv { get; set; }
         [Required(ErrorMessage = "Expiry month is required.")]
-        [ValidCardMonth(ErrorMessage = "Expiry month is not valid.")]
         public int ExpiryMonth { get; set; }
         [Required(ErrorMessage = "Expiry year is required.")]
-        [ValidCardYear]
         public int ExpiryYear { get; set; }
         public DateTime CreateDate { get; set; }
         public string Notes { get; set; }

@@ -120,7 +120,7 @@ namespace SecureVault.Web.Controllers
         // POST: Card/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, CardViewModel model)
+        public ActionResult Edit([Bind(include: "BankId, CardId, CardTypeId,CardNumber, Cvv,ExpiryMonth,ExpiryYear,Notes") ]CardViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -140,12 +140,14 @@ namespace SecureVault.Web.Controllers
             }
             else
             {
-                return RedirectToAction("Edit", new
-                {
-                    Id = model.BankId,
-                    CardViewModel = model
-                    
-                });
+                return RedirectToAction("Edit");
+                //return View("Edit", model);
+                //return RedirectToAction("Edit", new
+                //{
+                //    Id = model.BankId,
+                //    CardViewModel = model
+
+                //});
             }
         }
 

@@ -29,13 +29,11 @@
                 </div>
                 <div class="card-body">
                     @using (@Html.BeginForm(
-                     "Edit",
-                     "Card", 
-                     new {Id = Model.BankId, CardViewModel = Model},
-                     FormMethod.Post,
-                     true,
-                     new { @class = "form-horizontal" }
-                     ))
+                    "Edit",
+                    "Card",
+                    FormMethod.Post,
+                    new { @class = "form-horizontal" }
+                    ))
                     {
                         @Html.AntiForgeryToken()
 
