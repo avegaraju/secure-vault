@@ -8,8 +8,8 @@
 @section Scripts
 {
     <script type="text/javascript">
-        $(function() {
-            $("#showPasswordChkB").change(function() {
+        $(function () {
+            $("#showPasswordChkB").change(function () {
                 var checked = $(this).is(":checked");
                 if (checked) {
                     $("#passwordTxtBx").attr("type", "text");
@@ -36,84 +36,91 @@
 </div>
 <br />
 
-
-<div class="col-lg-10">
-    <div class="card">
-        <div class="card-header d-flex align-items-center">
-            <h3 class="h4">Update your bank data</h3>
-        </div>
-        <div class="card-body">
-            @using (@Html.BeginForm(
-              "Edit",
-              "Bank",
-              routeValues: new { Id = Model.BankId, BankViewModel = Model },
-              FormMethod.Post,
-              antiforgery: true,
-              new { @class = "form-horizontal" }))
-            {
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
-
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(model => model.BankName, htmlAttributes: new { @class = "form-control", placeholder = "Bank Name" })
-                        @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
-                    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <h3 class="h4">Update your bank data</h3>
                 </div>
-                <div class="line"></div>
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.AccountNumber, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
+                <div class="card-body">
+                    @using (@Html.BeginForm(
+                       "Edit",
+                       "Bank",
+                       routeValues: new { Id = Model.BankId, BankViewModel = Model },
+                       FormMethod.Post,
+                       antiforgery: true,
+                       new { @class = "form-horizontal" }))
+                    {
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.BankName, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
 
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(model => model.AccountNumber, htmlAttributes: new { @class = "form-control", placeholder = "Account Number" })
-                        @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-sm-9">
-                        <div class="form-group-material">
-                            @Html.TextBoxFor(model => model.LoginId, htmlAttributes: new { @class = "input-material" })
-                            @Html.LabelFor(model => model.LoginId, htmlAttributes: new { @class = "label-material" })
-                            @Html.ValidationMessageFor(model => model.LoginId, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group-material">
-                            @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "input-material", Id = "passwordTxtBx", type = "password" })
-                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "label-material" })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                            <div class="form-group-material">
-                                @Html.CheckBox("showPassword", false, new { Id = "showPasswordChkB", @class = "checkbox-template" })
-                                @Html.Label("showPwdLbl", "Show password", new { @class = "small" })
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.BankName, htmlAttributes: new { @class = "form-control", placeholder = "Bank Name" })
+                                @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
-                    <div class="col-sm-9">
-                        @Html.TextBoxFor(model => model.Url, htmlAttributes: new { @class = "form-control", placeholder = "Website url" })
-                        @Html.HiddenFor(model => model.CreateDate)
-                        @Html.HiddenFor(model => model.BankId)
-                    </div>
-                </div>
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
+                        <div class="line"></div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.AccountNumber, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
 
-                    <div class="col-sm-9">
-                        @Html.TextAreaFor(model => model.Notes, htmlAttributes: new { @class = "form-control", placeholder = "Notes" })
-                    </div>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.AccountNumber, htmlAttributes: new { @class = "form-control", placeholder = "Account Number" })
+                                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-9">
+                                <div class="form-group-material">
+                                    @Html.TextBoxFor(model => model.LoginId, htmlAttributes: new { @class = "input-material" })
+                                    @Html.LabelFor(model => model.LoginId, htmlAttributes: new { @class = "label-material" })
+                                    @Html.ValidationMessageFor(model => model.LoginId, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group-material">
+                                    @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "input-material", Id = "passwordTxtBx", type = "password" })
+                                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "label-material" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    <div class="form-group-material">
+                                        @Html.CheckBox("showPassword", false, new { Id = "showPasswordChkB", @class = "checkbox-template" })
+                                        @Html.Label("showPwdLbl", "Show password", new { @class = "small" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(model => model.Url, htmlAttributes: new { @class = "form-control", placeholder = "Website url" })
+                                @Html.HiddenFor(model => model.CreateDate)
+                                @Html.HiddenFor(model => model.BankId)
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "col-sm-3 form-control-label" })
+
+                            <div class="col-sm-9">
+                                @Html.TextAreaFor(model => model.Notes, htmlAttributes: new { @class = "form-control", placeholder = "Notes" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="submit" value="Update" id="btnUpdateBank" class="btn btn-primary btn-block" />
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="reset" value="Cancel" id="btnCancel" class="btn btn-secondary btn-block" />
+                            </div>
+                        </div>
+                    }
                 </div>
-                <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <input type="submit" value="Update" id="btnUpdateBank" class="btn btn-primary btn-block" />
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="reset" value="Cancel" id="btnCancel" class="btn btn-secondary btn-block" />
-                    </div>
-                </div>
-            }
+            </div>
         </div>
+        @{
+            await Html.RenderPartialAsync("_PasswordGeneratorPartial", new PasswordViewModel());
+        }
     </div>
 </div>
+
 
 
 
