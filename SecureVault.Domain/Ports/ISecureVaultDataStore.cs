@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SecureVault.Domain.Bank;
 using SecureVault.Domain.Card;
+using SecureVault.Domain.Requests;
 
 namespace SecureVault.Domain.Ports
 {
@@ -13,5 +14,7 @@ namespace SecureVault.Domain.Ports
         IReadOnlyCollection<CardTypesData> GetCardTypes();
         void AddCard(CardData cardData);
         IReadOnlyCollection<CardData> GetCards();
+        CardData GetCardById(int cardId);
+        void UpdateCard(CardData cardData);
     }
 }

@@ -48,6 +48,28 @@ namespace SecureVault.Domain.Card
             Notes = notes;
         }
 
+        private CardData(
+            int bankId,
+            int cardId,
+            int cardTypeId,
+            string cardNumber,
+            int cvv,
+            int expiryMonth,
+            int expiryYear,
+            string notes
+        )
+        {
+            BankId = bankId;
+            CardId = cardId;
+            CardTypeId = cardTypeId;
+            CardNumber = cardNumber;
+            Cvv = cvv;
+            ExpiryMonth = expiryMonth;
+            ExpiryYear = expiryYear;
+            CreateDate = DateTime.Now;
+            Notes = notes;
+        }
+
         public int BankId { get; }
         public int CardId { get; }
         public string BankName { get; }
@@ -100,6 +122,29 @@ namespace SecureVault.Domain.Card
                     bankId,
                     cardId,
                     bankName,
+                    cardTypeId,
+                    cardNumber,
+                    cvv,
+                    expiryMonth,
+                    expiryYear,
+                    notes
+                );
+            }
+
+            public static CardData Make(
+                int cardId,
+                int bankId,
+                int cardTypeId,
+                string cardNumber,
+                int cvv,
+                int expiryMonth,
+                int expiryYear,
+                string notes
+            )
+            {
+                return new CardData(
+                    bankId,
+                    cardId,
                     cardTypeId,
                     cardNumber,
                     cvv,

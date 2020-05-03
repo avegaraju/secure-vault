@@ -118,6 +118,11 @@ namespace SecureVault.Persistence
 
         public IReadOnlyCollection<CardData> GetCards()
         {
+            return GetAllCards().ToList();
+        }
+
+        private IEnumerable<CardData> GetAllCards()
+        {
             return Cards.Join(
                 inner: Banks,
                 outerKeySelector: card => card.BankId,
@@ -139,7 +144,32 @@ namespace SecureVault.Persistence
                     bankCard.Card.CreateDate,
                     bankCard.Card.Notes
                 )
-            ).ToList();
+            );
+        }
+
+        public CardData GetCardById(int cardId)
+        {
+            return GetAllCards()
+                .SingleOrDefault(data => data.CardId == cardId);
+        }
+
+        public void UpdateCard(CardData cardData)
+        {
+            var card = new Card
+            {
+                BankId = cardData.BankId,
+                CardId = cardData.CardId,
+                CardNumber = cardData.CardNumber,
+                CardTypeId = cardData.CardTypeId,
+                Cvv = cardData.Cvv,
+                ExpiryYear = cardData.ExpiryYear,
+                ExpiryMonth = cardData.ExpiryMonth,
+                Notes = cardData.Notes
+            };
+            
+            Cards.Update(card);
+
+            SaveChanges();
         }
     }
 }

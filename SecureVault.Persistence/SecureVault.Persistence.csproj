@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200503201500_foregn-key-bank-card.cs" />
+    <Compile Remove="Migrations\20200503201500_foregn-key-bank-card.Designer.cs" />
+    <Compile Remove="Migrations\20200503201945_card-bn-foreih-key.cs" />
+    <Compile Remove="Migrations\20200503201945_card-bn-foreih-key.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>

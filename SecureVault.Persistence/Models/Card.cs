@@ -9,10 +9,12 @@ namespace SecureVault.Persistence.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CardId { get; set; }
-        [ForeignKey("Bank")]
+        [ForeignKey("BankId")]
         public int BankId { get; set; }
+        public virtual Bank Bank { get; set; }
         [ForeignKey("CardType")]
         public int CardTypeId { get; set; }
+        public virtual CardType CardType { get; set; }
         [Required]
         public string CardNumber { get; set; }
         [Required]

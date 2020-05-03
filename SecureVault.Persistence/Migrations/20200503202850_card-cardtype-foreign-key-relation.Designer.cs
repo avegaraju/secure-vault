@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecureVault.Persistence;
 
 namespace SecureVault.Persistence.Migrations
 {
     [DbContext(typeof(SecureVaultContext))]
-    partial class SecureVaultContextModelSnapshot : ModelSnapshot
+    [Migration("20200503202850_card-cardtype-foreign-key-relation")]
+    partial class cardcardtypeforeignkeyrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

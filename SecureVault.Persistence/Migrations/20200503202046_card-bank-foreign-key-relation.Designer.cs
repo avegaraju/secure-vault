@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecureVault.Persistence;
 
 namespace SecureVault.Persistence.Migrations
 {
     [DbContext(typeof(SecureVaultContext))]
-    partial class SecureVaultContextModelSnapshot : ModelSnapshot
+    [Migration("20200503202046_card-bank-foreign-key-relation")]
+    partial class cardbankforeignkeyrelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,8 +98,6 @@ namespace SecureVault.Persistence.Migrations
 
                     b.HasIndex("BankId");
 
-                    b.HasIndex("CardTypeId");
-
                     b.ToTable("Cards");
                 });
 
@@ -172,12 +172,6 @@ namespace SecureVault.Persistence.Migrations
                     b.HasOne("SecureVault.Persistence.Models.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SecureVault.Persistence.Models.CardType", "CardType")
-                        .WithMany()
-                        .HasForeignKey("CardTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

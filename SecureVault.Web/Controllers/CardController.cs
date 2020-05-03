@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SecureVault.Domain.Exceptions;
 using SecureVault.Domain.Requests;
+using SecureVault.Domain.Responses;
 using SecureVault.Domain.UseCases;
 using SecureVault.Web.Models;
 
@@ -13,18 +17,24 @@ namespace SecureVault.Web.Controllers
         private readonly IGetCardTypesUseCase _getCardTypesUseCase;
         private readonly IAddCardUseCase _addCardUseCase;
         private readonly IGetCardsUseCase _getCardsUseCase;
+        private readonly IGetCardByIdUseCase _getCardByIdUseCase;
+        private readonly IUpdateCardUseCase _updateCardUseCase;
 
         public CardController(
             IGetBanksUseCase getBanksUseCase,
             IGetCardTypesUseCase getCardTypesUseCase,
-            IAddCardUseCase addCardUseCase, 
-            IGetCardsUseCase getCardsUseCase
-            )
+            IAddCardUseCase addCardUseCase,
+            IGetCardsUseCase getCardsUseCase,
+            IGetCardByIdUseCase getCardByIdUseCase,
+            IUpdateCardUseCase updateCardUseCase
+        )
         {
             _getBanksUseCase = getBanksUseCase;
             _getCardTypesUseCase = getCardTypesUseCase;
             _addCardUseCase = addCardUseCase;
             _getCardsUseCase = getCardsUseCase;
+            _getCardByIdUseCase = getCardByIdUseCase;
+            _updateCardUseCase = updateCardUseCase;
         }
 
         public IActionResult Index()
@@ -67,9 +77,76 @@ namespace SecureVault.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Edit(int cardId)
+        public IActionResult Edit(int id)
         {
-            return View();
+            CardResponse cardResponse;
+            IReadOnlyCollection<CardTypeResponse> cardTypeResponse;
+            try
+            {
+                cardResponse = _getCardByIdUseCase.Get(id);
+                cardTypeResponse = _getCardTypesUseCase.Get();
+            }
+            catch (NotFoundException e)
+            {
+                return View("NotFound");
+            }
+
+            var cardViewModel = new CardViewModel
+            {
+                BankId = cardResponse.BankId,
+                BankName = cardResponse.BankName,
+                CardId = cardResponse.CardId,
+                CardNumber = cardResponse.CardNumber,
+                CardTypes = cardTypeResponse.Select(
+                            response => new SelectListItem(
+                                response.CardType, 
+                                response.CardTypeId.ToString()
+                                )
+                            ),
+                CardTypeId = cardResponse.CardTypeId,
+                CreateDate = cardResponse.CreateDate,
+                Cvv = cardResponse.Cvv,
+                ExpiryMonth = cardResponse.ExpiryMonth,
+                ExpiryYear = cardResponse.ExpiryYear,
+                Notes = cardResponse.Notes
+            };
+
+            cardViewModel.CardTypes.Single(
+                item => item.Value == cardViewModel.CardTypeId.ToString()).Selected = true;
+
+            return View(cardViewModel);
+        }
+
+        // POST: Card/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, CardViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _updateCardUseCase.Execute(new UpdateCardRequest(
+                        model.BankId,
+                        model.CardId,
+                        model.CardTypeId,
+                        model.CardNumber,
+                        model.Cvv,
+                        model.ExpiryMonth,
+                        model.ExpiryYear,
+                        model.Notes
+                    )
+                );
+
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction("Edit", new
+                {
+                    Id = model.BankId,
+                    CardViewModel = model
+                    
+                });
+            }
         }
 
         public IActionResult Create()
