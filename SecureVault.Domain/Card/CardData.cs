@@ -24,14 +24,40 @@ namespace SecureVault.Domain.Card
             Notes = notes;
         }
 
-        public int BankId { get; set; }
-        public int CardTypeId { get; set; }
-        public string CardNumber { get; set; }
-        public int Cvv { get; set; }
-        public int ExpiryMonth { get; set; }
-        public int ExpiryYear { get; set; }
-        public DateTime CreateDate { get; set; }
-        public string Notes { get; set; }
+        private CardData(
+            int bankId,
+            int cardId,
+            string bankName,
+            int cardTypeId,
+            string cardNumber,
+            int cvv,
+            int expiryMonth,
+            int expiryYear,
+            string notes
+        )
+        {
+            BankId = bankId;
+            CardId = cardId;
+            BankName = bankName;
+            CardTypeId = cardTypeId;
+            CardNumber = cardNumber;
+            Cvv = cvv;
+            ExpiryMonth = expiryMonth;
+            ExpiryYear = expiryYear;
+            CreateDate = DateTime.Now;
+            Notes = notes;
+        }
+
+        public int BankId { get; }
+        public int CardId { get; }
+        public string BankName { get; }
+        public int CardTypeId { get; }
+        public string CardNumber { get; }
+        public int Cvv { get; }
+        public int ExpiryMonth { get; }
+        public int ExpiryYear { get; }
+        public DateTime CreateDate { get; }
+        public string Notes { get; }
 
         public static class Factory
         {
@@ -48,6 +74,32 @@ namespace SecureVault.Domain.Card
             {
                 return new CardData(
                     bankId,
+                    cardTypeId,
+                    cardNumber,
+                    cvv,
+                    expiryMonth,
+                    expiryYear,
+                    notes
+                );
+            }
+
+            public static CardData Make(
+                int bankId,
+                int cardId,
+                string bankName,
+                int cardTypeId,
+                string cardNumber,
+                int cvv,
+                int expiryMonth,
+                int expiryYear,
+                DateTime createDate,
+                string notes
+            )
+            {
+                return new CardData(
+                    bankId,
+                    cardId,
+                    bankName,
                     cardTypeId,
                     cardNumber,
                     cvv,

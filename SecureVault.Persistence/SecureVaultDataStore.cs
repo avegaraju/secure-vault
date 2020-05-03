@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SecureVault.Domain.Bank;
@@ -115,6 +114,32 @@ namespace SecureVault.Persistence
             });
 
             SaveChanges();
+        }
+
+        public IReadOnlyCollection<CardData> GetCards()
+        {
+            return Cards.Join(
+                inner: Banks,
+                outerKeySelector: card => card.BankId,
+                innerKeySelector: bank => bank.BankId,
+                resultSelector: (card, bank) => new {Card = card, Bank = bank}
+            ).Join(
+                CardTypes,
+                outerKeySelector: bankCardTuple => bankCardTuple.Card.CardTypeId,
+                innerKeySelector: type => type.CardTypeId,
+                (bankCard, type) => CardData.Factory.Make(
+                    bankCard.Bank.BankId,
+                    bankCard.Card.CardId,
+                    bankCard.Bank.Name,
+                    bankCard.Card.CardTypeId,
+                    bankCard.Card.CardNumber,
+                    bankCard.Card.Cvv,
+                    bankCard.Card.ExpiryMonth,
+                    bankCard.Card.ExpiryYear,
+                    bankCard.Card.CreateDate,
+                    bankCard.Card.Notes
+                )
+            ).ToList();
         }
     }
 }

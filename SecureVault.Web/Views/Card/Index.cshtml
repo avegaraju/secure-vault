@@ -1,7 +1,58 @@
-﻿@{
+﻿@model IReadOnlyCollection<CardViewModel>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<!-- Page Header-->
+<header class="page-header">
+    <div class="container-fluid">
+        <h2 class="no-margin-bottom">Cards</h2>
+    </div>
+</header>
+<!-- Breadcrumb-->
+<div class="breadcrumb-holder container-fluid">
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">@Html.ActionLink("Home", actionName: "Index", controllerName: "Home")</li>
+        <li class="breadcrumb-item active">Cards</li>
+    </ul>
+</div>
+<br />
+
+
+<div class="container-fluid">
+    @foreach (var card in Model)
+    {
+        <div class="row">
+            <div class="col-l-4 col-md-8 mb-5">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">@card.BankName</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@card.CardNumber</div>
+                            </div>
+                            <div class="col-auto">
+                                @Html.ActionLink(
+                                    linkText: "create",
+                                    actionName: "Edit",
+                                    controllerName: "Card",
+                                    routeValues: new { Id = card.CardId },
+                                    htmlAttributes: new { @class = "material-icons" }
+                                    )
+                                @Html.ActionLink(
+                                    linkText: "remove_circle_outline",
+                                    actionName: "Delete",
+                                    controllerName: "Card",
+                                    routeValues: new { Id = card.CardId },
+                                    htmlAttributes: new { @class = "material-icons" }
+                                    )
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 

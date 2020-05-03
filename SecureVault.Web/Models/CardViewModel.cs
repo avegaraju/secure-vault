@@ -10,6 +10,7 @@ namespace SecureVault.Web.Models
     {
         public int CardId { get; set; }
         public int BankId { get; set; }
+        public string BankName { get; set; }
         public int CardTypeId { get; set; }
         public string CardNumber { get; set; }
         public int Cvv { get; set; }

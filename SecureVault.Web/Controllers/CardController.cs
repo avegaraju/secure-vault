@@ -12,21 +12,33 @@ namespace SecureVault.Web.Controllers
         private readonly IGetBanksUseCase _getBanksUseCase;
         private readonly IGetCardTypesUseCase _getCardTypesUseCase;
         private readonly IAddCardUseCase _addCardUseCase;
+        private readonly IGetCardsUseCase _getCardsUseCase;
 
         public CardController(
             IGetBanksUseCase getBanksUseCase,
             IGetCardTypesUseCase getCardTypesUseCase,
-            IAddCardUseCase addCardUseCase
-        )
+            IAddCardUseCase addCardUseCase, 
+            IGetCardsUseCase getCardsUseCase
+            )
         {
             _getBanksUseCase = getBanksUseCase;
             _getCardTypesUseCase = getCardTypesUseCase;
             _addCardUseCase = addCardUseCase;
+            _getCardsUseCase = getCardsUseCase;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var cards = _getCardsUseCase.Get()
+                .Select(response => new CardViewModel
+                {
+                    BankName = response.BankName,
+                    BankId = response.BankId,
+                    CardId = response.CardId,
+                    CardNumber = response.CardNumber
+                }).ToList();
+
+            return View(cards);
         }
 
         [HttpPost]
@@ -53,6 +65,11 @@ namespace SecureVault.Web.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Edit(int cardId)
+        {
+            return View();
         }
 
         public IActionResult Create()
