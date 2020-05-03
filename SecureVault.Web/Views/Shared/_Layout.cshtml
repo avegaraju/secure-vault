@@ -11,7 +11,7 @@
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="~/vendor/font-awesome/cnpss/font-awesome.min.css">
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css">
     <!-- Fontastic Custom icon font-->
     <link rel="stylesheet" href="~/css/fontastic.css">
     <!-- Google fonts - Poppins -->
@@ -23,16 +23,6 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="~/img/favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <script type="text/javascript">
-        $(function () {
-            $("#btnCopyToClipBoard").click(function () {
-                alert('clicked');
-                var password = $("#generatedPasswordTxtBx").val;
-                window.clipboardData.setData('Text', password);
-            });
-        });
-    </script>
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -168,6 +158,9 @@
                     <li class="active">
                         @Html.ActionLink("Banks", actionName: "Index", controllerName: "Bank", routeValues: new { }, htmlAttributes: new { @class = "icon-bill" })
                     <li>
+                     <li>
+                        @Html.ActionLink("Cards", actionName: "Index", controllerName: "Card", routeValues: new { }, htmlAttributes: new { @class = "icon-pencil-case" })
+                    <li>
                 </ul>
             </nav>
             <div class="content-inner">
@@ -204,5 +197,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-
 </html>

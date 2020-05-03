@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SecureVault.Domain.Bank;
+using SecureVault.Domain.Card;
 using SecureVault.Domain.Ports;
 using SecureVault.Persistence.Models;
 
@@ -90,6 +91,13 @@ namespace SecureVault.Persistence
             
             Banks.Update(bank);
             SaveChanges();
+        }
+
+        public IReadOnlyCollection<CardTypesData> GetCardTypes()
+        {
+            return CardTypes
+                .Select(type => new CardTypesData(type.CardTypeId, type.Name))
+                .ToList();
         }
     }
 }
