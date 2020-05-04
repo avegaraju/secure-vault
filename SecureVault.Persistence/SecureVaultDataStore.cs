@@ -92,6 +92,12 @@ namespace SecureVault.Persistence
             SaveChanges();
         }
 
+        public void DeleteBank(int bankId)
+        {
+            Banks.First(bank => bank.BankId == bankId).Active = false;
+            SaveChanges();
+        }
+
         public IReadOnlyCollection<CardTypesData> GetCardTypes()
         {
             return CardTypes

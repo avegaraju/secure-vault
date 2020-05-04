@@ -1,12 +1,10 @@
-﻿using SecureVault.Domain.Bank;
-using SecureVault.Domain.Ports;
-using SecureVault.Domain.Requests;
+﻿using SecureVault.Domain.Ports;
 
 namespace SecureVault.Domain.UseCases
 {
     public interface IDeleteBankUseCase
     {
-        void Execute(DeleteBankRequest deleteBankRequest);
+        void Execute(int bankId);
     }
     public class DeleteBankUseCase: IDeleteBankUseCase
     {
@@ -16,21 +14,9 @@ namespace SecureVault.Domain.UseCases
         {
             _secureVaultDataStore = secureVaultDataStore;
         }
-        public void Execute(DeleteBankRequest deleteBankRequest)
+        public void Execute(int bankId)
         {
-            var bankData = new BankData(
-                deleteBankRequest.BankId,
-                deleteBankRequest.BankName,
-                deleteBankRequest.AccountNumber,
-                deleteBankRequest.Url,
-                deleteBankRequest.LoginId,
-                deleteBankRequest.Password,
-                deleteBankRequest.CreateDate,
-                deleteBankRequest.Notes,
-                deleteBankRequest.ModifyDate,
-                active: false
-            );
-            _secureVaultDataStore.UpdateBank(bankData);
+            _secureVaultDataStore.DeleteBank(bankId);
         }
     }
 }

@@ -203,25 +203,7 @@ namespace SecureVault.Web.Controllers
         {
             try
             {
-                var bankName = formCollection["BankName"][0];
-                var accountNumber = formCollection["AccountNumber"][0];
-                var loginId = formCollection["LoginId"][0];
-                var password = formCollection["Password"][0];
-                var url = formCollection["Url"][0];
-                var createDate = DateTime.Parse(formCollection["CreateDate"][0]);
-
-                var deleteBankRequest = new DeleteBankRequest(
-                    id,
-                    bankName,
-                    accountNumber,
-                    loginId,
-                    password,
-                    url,
-                    createDate,
-                    string.Empty
-                );
-
-                _deleteBankUseCase.Execute(deleteBankRequest);
+                _deleteBankUseCase.Execute(id);
 
                 return RedirectToAction(nameof(Index));
             }

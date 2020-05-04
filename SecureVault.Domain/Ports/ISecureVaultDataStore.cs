@@ -11,6 +11,7 @@ namespace SecureVault.Domain.Ports
         IReadOnlyCollection<BankData> GetBanks();
         BankData GetBankById(int bankId);
         void UpdateBank(BankData bankData);
+        void DeleteBank(int bankId);
         IReadOnlyCollection<CardTypesData> GetCardTypes();
         void AddCard(CardData cardData);
         IReadOnlyCollection<CardData> GetCards();
