@@ -17,5 +17,6 @@ namespace SecureVault.Domain.Ports
         IReadOnlyCollection<CardData> GetCards();
         CardData GetCardById(int cardId);
         void UpdateCard(CardData cardData);
+        void DeleteCard(int cardId);
     }
 }

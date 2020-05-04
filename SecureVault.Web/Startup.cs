@@ -60,6 +60,7 @@ namespace SecureVault.Web
             services.AddTransient<IGetCardsUseCase, GetCardsUseCase>();
             services.AddTransient<IGetCardByIdUseCase, GetCardByIdUseCase>();
             services.AddTransient<IUpdateCardUseCase, UpdateCardUseCase>();
+            services.AddTransient<IDeleteCardUseCase, DeleteCardUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

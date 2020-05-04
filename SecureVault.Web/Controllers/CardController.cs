@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SecureVault.Domain.Exceptions;
@@ -19,6 +21,7 @@ namespace SecureVault.Web.Controllers
         private readonly IGetCardsUseCase _getCardsUseCase;
         private readonly IGetCardByIdUseCase _getCardByIdUseCase;
         private readonly IUpdateCardUseCase _updateCardUseCase;
+        private readonly IDeleteCardUseCase _deleteCardUseCase;
 
         public CardController(
             IGetBanksUseCase getBanksUseCase,
@@ -26,8 +29,8 @@ namespace SecureVault.Web.Controllers
             IAddCardUseCase addCardUseCase,
             IGetCardsUseCase getCardsUseCase,
             IGetCardByIdUseCase getCardByIdUseCase,
-            IUpdateCardUseCase updateCardUseCase
-        )
+            IUpdateCardUseCase updateCardUseCase, 
+            IDeleteCardUseCase deleteCardUseCase)
         {
             _getBanksUseCase = getBanksUseCase;
             _getCardTypesUseCase = getCardTypesUseCase;
@@ -35,6 +38,7 @@ namespace SecureVault.Web.Controllers
             _getCardsUseCase = getCardsUseCase;
             _getCardByIdUseCase = getCardByIdUseCase;
             _updateCardUseCase = updateCardUseCase;
+            _deleteCardUseCase = deleteCardUseCase;
         }
 
         public IActionResult Index()
@@ -75,6 +79,63 @@ namespace SecureVault.Web.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult Delete(int id)
+        {
+            CardResponse cardResponse;
+            IReadOnlyCollection<CardTypeResponse> cardTypeResponse;
+
+            try
+            {
+                cardResponse = _getCardByIdUseCase.Get(id);
+                cardTypeResponse = _getCardTypesUseCase.Get();
+            }
+            catch (NotFoundException e)
+            {
+                return View("NotFound");
+            }
+
+            var cardViewModel = new CardViewModel
+            {
+                BankId = cardResponse.BankId,
+                BankName = cardResponse.BankName,
+                CardId = cardResponse.CardId,
+                CardNumber = cardResponse.CardNumber,
+                CardTypes = cardTypeResponse.Select(
+                    response => new SelectListItem(
+                        response.CardType,
+                        response.CardTypeId.ToString()
+                    )
+                ),
+                CardTypeId = cardResponse.CardTypeId,
+                CreateDate = cardResponse.CreateDate,
+                Cvv = cardResponse.Cvv,
+                ExpiryMonth = cardResponse.ExpiryMonth,
+                ExpiryYear = cardResponse.ExpiryYear,
+                Notes = cardResponse.Notes
+            };
+
+            cardViewModel.CardTypes.Single(
+                item => item.Value == cardViewModel.CardTypeId.ToString()).Selected = true;
+
+            return View(cardViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                _deleteCardUseCase.Execute(id);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)

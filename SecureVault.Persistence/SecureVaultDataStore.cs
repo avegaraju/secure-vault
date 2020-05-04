@@ -177,5 +177,13 @@ namespace SecureVault.Persistence
 
             SaveChanges();
         }
+
+        public void DeleteCard(int cardId)
+        {
+            Card card = new Card {CardId = cardId};
+            Cards.Attach(card);
+            Cards.Remove(card);
+            SaveChanges();
+        }
     }
 }
