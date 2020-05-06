@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "_Layout";
+}
+<!-- Side Navbar -->
+@{
+    await Html.RenderPartialAsync("SideNavigation");
+}
+
+<div class="content-inner">
+    @RenderBody()
+   
+</div>
