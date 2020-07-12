@@ -4,7 +4,6 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Content.cshtml";
 }
-
 @section Scripts
 {
     <script type="text/javascript">
@@ -20,6 +19,7 @@
         });
     </script>
 }
+
 
 <!-- Page Header-->
 <header class="page-header">
@@ -45,12 +45,12 @@
                 </div>
                 <div class="card-body">
                     @using (@Html.BeginForm(
-                       "Edit",
-                       "Bank",
-                       routeValues: new { Id = Model.BankId, BankViewModel = Model },
-                       FormMethod.Post,
-                       antiforgery: true,
-                       new { @class = "form-horizontal" }))
+                      "Edit",
+                      "Bank",
+                      routeValues: new { Id = Model.BankId, BankViewModel = Model },
+                      FormMethod.Post,
+                      antiforgery: true,
+                      new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
 

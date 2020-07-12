@@ -30,7 +30,23 @@
 </head>
 
 <body>
+<!-- JavaScript files-->
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/popper.js/umd/popper.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/vendor/jquery.cookie/jquery.cookie.js"></script>
+<script src="~/vendor/chart.js/Chart.min.js"></script>
+<script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/vendor/jquery.cookie/jquery.cookie.js"></script>
+<!-- Main File-->
+<script src="~/js/front.js"></script>
     <div class="page">
         <!-- Main Navbar-->
         <header class="header">
@@ -46,7 +62,8 @@
                     <div class="navbar-holder d-flex align-items-center justify-content-between">
                         <!-- Navbar Header-->
                         <div class="navbar-header">
-                            <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                            <!-- Navbar Brand -->
+                            <a href="index.html" class="navbar-brand d-none d-sm-inline-block">
                                 <div class="brand-text d-none d-lg-inline-block"><span>Secure </span><strong>Vault</strong></div>
                                 <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>SV</strong></div>
                             </a>
@@ -92,7 +109,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
+                                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications </strong></a></li>
                                 </ul>
                             </li>
                             <!-- Messages                        -->
@@ -123,7 +140,7 @@
                                             </div>
                                         </a>
                                     </li>
-                                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages   </strong></a></li>
+                                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages </strong></a></li>
                                 </ul>
                             </li>
                             <!-- Languages dropdown    -->
@@ -131,7 +148,7 @@
                                 <a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/GB.png" alt="English"><span class="d-none d-sm-inline-block">English</span></a>
                                 <ul aria-labelledby="languages" class="dropdown-menu">
                                     <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/DE.png" alt="English" class="mr-2">German</a></li>
-                                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" alt="English" class="mr-2">French                                         </a></li>
+                                    <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" alt="English" class="mr-2">French </a></li>
                                 </ul>
                             </li>
                             <!-- Logout    -->
@@ -143,24 +160,5 @@
         </header>
         @RenderBody()
     </div>
-    <!-- JavaScript files-->
-    <script src="~/vendor/jquery/jquery.min.js"></script>
-    <script src="~/vendor/popper.js/umd/popper.min.js"></script>
-    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/vendor/jquery.cookie/jquery.cookie.js"></script>
-    <script src="~/vendor/chart.js/Chart.min.js"></script>
-    <script src="~/vendor/jquery-validation/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="~/vendor/jquery.cookie/jquery.cookie.js"></script>
-    <!-- Main File-->
-    <script src="~/js/front.js"></script>
-
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
