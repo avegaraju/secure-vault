@@ -14,6 +14,7 @@ using SecureVault.Domain.Exceptions;
 using SecureVault.Domain.Ports;
 using SecureVault.Domain.UseCases;
 using SecureVault.Persistence;
+using SecureVault.Persistence.SqlServer;
 
 namespace SecureVault.Web
 {

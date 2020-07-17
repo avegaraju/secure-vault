@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SecureVault.Persistence.Migrations
+namespace SecureVault.Persistence.SqlServer.Migrations
 {
     public partial class cardbankforeignkeyrelation : Migration
     {

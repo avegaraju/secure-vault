@@ -6,8 +6,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SecureVault.Persistence;
+using SecureVault.Persistence.SqlServer;
 
-namespace SecureVault.Persistence.Migrations
+namespace SecureVault.Persistence.SqlServer.Migrations
 {
     [DbContext(typeof(SecureVaultContext))]
     [Migration("20200503202046_card-bank-foreign-key-relation")]
@@ -21,7 +22,7 @@ namespace SecureVault.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("SecureVault.Persistence.Models.Bank", b =>
+            modelBuilder.Entity("SecureVault.Persistence.Models.SqlServer.Bank", b =>
                 {
                     b.Property<int>("BankId")
                         .ValueGeneratedOnAdd()
@@ -62,7 +63,7 @@ namespace SecureVault.Persistence.Migrations
                     b.ToTable("Banks");
                 });
 
-            modelBuilder.Entity("SecureVault.Persistence.Models.Card", b =>
+            modelBuilder.Entity("SecureVault.Persistence.Models.SqlServer.Card", b =>
                 {
                     b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
@@ -101,7 +102,7 @@ namespace SecureVault.Persistence.Migrations
                     b.ToTable("Cards");
                 });
 
-            modelBuilder.Entity("SecureVault.Persistence.Models.CardType", b =>
+            modelBuilder.Entity("SecureVault.Persistence.Models.SqlServer.CardType", b =>
                 {
                     b.Property<int>("CardTypeId")
                         .ValueGeneratedOnAdd()
@@ -134,7 +135,7 @@ namespace SecureVault.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SecureVault.Persistence.Models.User", b =>
+            modelBuilder.Entity("SecureVault.Persistence.Models.SqlServer.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -167,9 +168,9 @@ namespace SecureVault.Persistence.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("SecureVault.Persistence.Models.Card", b =>
+            modelBuilder.Entity("SecureVault.Persistence.Models.SqlServer.Card", b =>
                 {
-                    b.HasOne("SecureVault.Persistence.Models.Bank", "Bank")
+                    b.HasOne("SecureVault.Persistence.Models.SqlServer.Bank", "Bank")
                         .WithMany()
                         .HasForeignKey("BankId")
                         .OnDelete(DeleteBehavior.Cascade)

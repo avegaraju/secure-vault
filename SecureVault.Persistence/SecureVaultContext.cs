@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using SecureVault.Persistence.Models;
+using SecureVault.Persistence.SqlServer.Models;
 
-namespace SecureVault.Persistence
+namespace SecureVault.Persistence.SqlServer
 {
     public class SecureVaultContext: DbContext
     {

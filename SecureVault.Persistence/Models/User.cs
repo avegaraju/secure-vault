@@ -1,10 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.IO;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
-namespace SecureVault.Persistence.Models
+namespace SecureVault.Persistence.SqlServer.Models
 {
     public class User
     {

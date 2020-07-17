@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace SecureVault.Persistence.Models
+namespace SecureVault.Persistence.SqlServer.Models
 {
     public class CardType
     {

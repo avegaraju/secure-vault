@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureVault.Web", "SecureVault.Web\SecureVault.Web.csproj", "{A09F7B82-FC34-4BB6-BF7D-25D04402EAEB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureVault.Persistence", "SecureVault.Persistence\SecureVault.Persistence.csproj", "{1B2CEFC4-3498-47F0-96B8-D01C050F33FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureVault.Persistence.SqlServer", "SecureVault.Persistence\SecureVault.Persistence.SqlServer.csproj", "{1B2CEFC4-3498-47F0-96B8-D01C050F33FD}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{8D89ED4C-AE93-472B-AF41-CD93C94C6BF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureVault.Domain", "SecureVault.Domain\SecureVault.Domain.csproj", "{4A4AFC5D-1F27-4A58-A80F-F658205EE4E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureVault.Domain", "SecureVault.Domain\SecureVault.Domain.csproj", "{4A4AFC5D-1F27-4A58-A80F-F658205EE4E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

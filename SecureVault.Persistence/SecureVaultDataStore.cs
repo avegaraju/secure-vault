@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using SecureVault.Domain.Bank;
 using SecureVault.Domain.Card;
 using SecureVault.Domain.Ports;
-using SecureVault.Persistence.Models;
+using SecureVault.Persistence.SqlServer.Models;
 
-namespace SecureVault.Persistence
+namespace SecureVault.Persistence.SqlServer
 {
     public class SecureVaultDataStore: SecureVaultContext, ISecureVaultDataStore 
     {
