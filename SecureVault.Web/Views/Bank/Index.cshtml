@@ -55,3 +55,12 @@
         </div>
     }
 </div>
+
+<div class="fixedAddButton">
+    @Html.ActionLink(
+        linkText: "add_circle",
+        actionName: "Create",
+        controllerName: "Bank",
+        routeValues: new { },
+        htmlAttributes: new { @class = "addButton material-icons"})
+</div>
